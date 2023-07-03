@@ -4,7 +4,7 @@ import pandas as pd
 import pickle
 
 df_clean = pd.read_csv('mimic_iv_cleaned.csv')
-X = df_clean.drop(['target', 'meld'], axis=1)
+X = df_clean.drop(['target'], axis=1)
 y = df_clean['target']
 
 # Now - predicting!

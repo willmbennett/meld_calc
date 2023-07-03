@@ -1,6 +1,14 @@
 # Imports
 import streamlit as st
 import pandas as pd
+import numpy as np
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from xgboost import XGBClassifier
+from sklearn.pipeline import Pipeline
+from sklearn.compose import ColumnTransformer,  make_column_selector as selector
+from sklearn.impute import SimpleImputer
+from imblearn.over_sampling import SMOTE
+from imblearn.pipeline import Pipeline as ImPipeline
 import pickle
 
 df_clean = pd.read_csv('mimic_iv_cleaned.csv')

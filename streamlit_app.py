@@ -8,6 +8,8 @@ df_clean = pd.read_csv('data/mimic_iv_cleaned.csv')
 # Load the model
 loaded_model = pickle.load(open('models/xgb_clus.pkl', 'rb'))
 
+print(loaded_model)
+
 # Opening intro text
 st.write("# Calculate Outcome for Cirrhosis Patient")
 

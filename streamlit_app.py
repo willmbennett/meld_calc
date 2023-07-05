@@ -65,8 +65,8 @@ with st.sidebar:
         
     # Bun Min
     with st.expander("Blood urea nitrogen (BUN) Min"):
-        st.write('A common blood test, the blood urea nitrogen (BUN) test reveals important information about how well your kidneys are working. A BUN test measures the amount of urea nitrogen that's in your blood.')
-        st.write('In general, around 6 to 24 mg/dL (2.1 to 8.5 mmol/L) is considered normal.')
+        st.write("A common blood test, the blood urea nitrogen (BUN) test reveals important information about how well your kidneys are working. A BUN test measures the amount of urea nitrogen that's in your blood.")
+        st.write("In general, around 6 to 24 mg/dL (2.1 to 8.5 mmol/L) is considered normal.")
         st.write('[Mayo Clinic](https://www.mayoclinic.org/tests-procedures/blood-urea-nitrogen/about/pac-20384821)')
         
         bun_min_label = 'BUN Min:'
@@ -77,8 +77,8 @@ with st.sidebar:
 
     # Anion Gap Min
     with st.expander("Anion Gap"):
-        st.write('An anion gap blood test checks the acid-base balance of your blood and if the electrolytes in your blood are properly balanced.')
-        st.write('There’s no universal “normal” anion gap, partly because laboratories and healthcare providers can measure and compare different electrolytes in your blood.')
+        st.write("An anion gap blood test checks the acid-base balance of your blood and if the electrolytes in your blood are properly balanced.")
+        st.write("There’s no universal “normal” anion gap, partly because laboratories and healthcare providers can measure and compare different electrolytes in your blood.")
         st.write('[Mayo Clinic](https://my.clevelandclinic.org/health/diagnostics/22041-anion-gap-blood-test)')
         
         aniongap_min_label = 'Anion Gap Min:'

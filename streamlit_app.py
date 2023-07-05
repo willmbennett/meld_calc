@@ -15,9 +15,9 @@ parient_choice = st.radio(
     ('Survived', 'Perished'))
 
 if parient_choice == 'Survived':
-    selected_patient_data = df_clean[df_clean.target == 0].sample()
+    selected_patient_data = df_clean[df_clean.target == 0].sample(random_state=42)
 else:
-    selected_patient_data = df_clean[df_clean.target == 1].sample()
+    selected_patient_data = df_clean[df_clean.target == 1].sample(random_state=42)
 
 X = selected_patient_data.drop(['target'], axis=1)
 y = selected_patient_data['target']
@@ -25,25 +25,23 @@ st.write(f'patient index {X.index}')
 
 st.write(f"Total Number of features: {len(X)} %")
 
-key_cols = ['inr_min',
+num_cols = {'inr_min',
             'pt_min',
             'ptt_min',
             'bun_min',
             'bilirubin_total_min',
             'bilirubin_total_max',
             'bun_max',
-            'inr_max',
-            'gender',
-            'race'
-           ]
+            'inr_max'}
+
+cat_cols = ['gender', 'race']
 
 # INR 
-inr_min = int(df_clean['inr_min'].min())
-inr_max = int(df_clean['inr_max'].max())
-inr = st.slider('International Normalised Ratio (INR):', inr_min, inr_max)
-st.write(f'INR value set to {inr}')
-X['inr_min'] = inr
-X['inr_max'] = inr
+
+inr_label = 'International Normalised Ratio (INR) Min:'
+inr_min = st.number_input(inr_label, value=X['inr_min'])
+st.write('New INR Min:', inr_min)
+X['inr_min'] = inr_min
 
 st.write(f"## Predict Patient Outcome:")
 

@@ -11,7 +11,7 @@ loaded_model = pickle.load(open('final_model.pkl', 'rb'))
 st.write("# Calculate Outcome for Cirrhosis Patient")
 
 parient_choice = st.radio(
-    "Example patient choice",
+    "Actual outcome:",
     ('Survived', 'Perished'))
 
 if parient_choice == 'Survived':
@@ -21,6 +21,30 @@ else:
 
 X = selected_patient_data.drop(['target'], axis=1)
 y = selected_patient_data['target']
+
+st.write(f"Total Number of features: {len(X)} %")
+
+key_cols = ['inr_min',
+            'pt_min',
+            'ptt_min',
+            'bun_min',
+            'bilirubin_total_min',
+            'bilirubin_total_max',
+            'bun_max',
+            'inr_max',
+            'gender',
+            'race'
+           ]
+
+# INR 
+inr_min = df_clean['inr_min'].min()
+inr_max = df_clean['inr_max'].max()
+inr = st.slider('International Normalised Ratio (INR):', inr_min, inr_max)
+st.write(f"INR value set to {inr}')
+X['inr_min'] = inr
+X['inr_max'] = inr
+
+st.write(f"## Predict Patient Outcome:")
 
 # Now - predicting!
 if st.button(label="Click to Predict"):

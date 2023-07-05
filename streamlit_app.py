@@ -23,7 +23,7 @@ X = selected_patient_data.drop(['target'], axis=1)
 y = selected_patient_data['target']
 st.write(f'patient index {X.index}')
 
-st.write(f"Total Number of features: {len(X.columns)}")
+st.write(f"Total Number of features:", len(X.columns))
 
 num_cols = {'inr_min',
             'pt_min',
@@ -37,10 +37,13 @@ num_cols = {'inr_min',
 cat_cols = ['gender', 'race']
 
 # INR 
+st.write(f"### International Normalised Ratio (INR)")
+st.write('A normal INR is 1.0. Each increase of 0.1 means the blood is slightly thinner (it takes longer to clot). INR is related to the prothrombin time (PT).')
+st.write('[Veteran Affairs](https://www.hepatitis.va.gov/hcv/patient/diagnosis/labtests-INR.asp#:~:text=A%20normal%20INR%20is%201.0,the%20prothrombin%20time%20(PT).)')
 
-inr_label = 'International Normalised Ratio (INR) Min:'
+inr_label = 'Min:'
 inr_default_value = X['inr_min'].iloc[0]
-inr_min = st.number_input(inr_label, value=inr_default_value)
+inr_min = st.number_input(inr_label, value=inr_default_value, step=0.1)
 st.write('New INR Min:', inr_min)
 X['inr_min'] = inr_min
 

@@ -40,7 +40,7 @@ key_cols = ['inr_min',
 inr_min = df_clean['inr_min'].min()
 inr_max = df_clean['inr_max'].max()
 inr = st.slider('International Normalised Ratio (INR):', inr_min, inr_max)
-st.write(f"INR value set to {inr}')
+st.write(f'INR value set to {inr}')
 X['inr_min'] = inr
 X['inr_max'] = inr
 

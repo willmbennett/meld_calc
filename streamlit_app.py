@@ -63,6 +63,9 @@ with st.sidebar:
         st.write('New INR Max:', round(inr_max,1))
         X['inr_max'] = inr_max
 
+st.write("## Inputs:")
+st.bar_chart(x=list(X[num_cols].columns), y=list(X[num_cols].values), use_container_width=True)
+
 st.write("## Predict Patient Outcome:")
 
 # Make predictions (and get out pred probabilities)

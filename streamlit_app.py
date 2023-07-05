@@ -1,4 +1,5 @@
 # Imports
+from sklearn.cluster import KMeans
 import streamlit as st
 import pandas as pd
 import pickle

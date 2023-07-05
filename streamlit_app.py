@@ -39,7 +39,8 @@ cat_cols = ['gender', 'race']
 # INR 
 
 inr_label = 'International Normalised Ratio (INR) Min:'
-inr_min = st.number_input(inr_label, value=X['inr_min'])
+inr_default_value = X['inr_min'][0]
+inr_min = st.number_input(inr_label, value=inr_default_value)
 st.write('New INR Min:', inr_min)
 X['inr_min'] = inr_min
 

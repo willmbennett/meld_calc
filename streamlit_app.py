@@ -21,6 +21,7 @@ else:
 
 X = selected_patient_data.drop(['target'], axis=1)
 y = selected_patient_data['target']
+st.write(f'patient index {X.index}')
 
 st.write(f"Total Number of features: {len(X)} %")
 
@@ -47,16 +48,16 @@ X['inr_max'] = inr
 st.write(f"## Predict Patient Outcome:")
 
 # Now - predicting!
-if st.button(label="Click to Predict"):
-    # Make predictions (and get out pred probabilities)
-    pred = loaded_model.predict(X)[0]
-    proba = loaded_model.predict_proba(X)[:,1][0]
-    
-    # Sharing the predictions
-    if pred == 0:
-        st.write("### The person is predicted to survive 90 days")
-        st.write(f"Predicted probability of dying: {proba*100:.2f} %")
+# if st.button(label="Click to Predict"):
+# Make predictions (and get out pred probabilities)
+pred = loaded_model.predict(X)[0]
+proba = loaded_model.predict_proba(X)[:,1][0]
 
-    elif pred == 1:
-        st.write("### The person is NOT predicted to survive 90 days!")
-        st.write(f"Predicted probability of dying: {proba*100:.2f} %")
+# Sharing the predictions
+if pred == 0:
+    st.write("### The person is predicted to survive 90 days")
+    st.write(f"Predicted probability of dying: {proba*100:.2f} %")
+
+elif pred == 1:
+    st.write("### The person is NOT predicted to survive 90 days!")
+    st.write(f"Predicted probability of dying: {proba*100:.2f} %")

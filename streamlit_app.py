@@ -42,7 +42,7 @@ cat_cols = ['gender', 'race']
 
 with st.sidebar:
     # INR Min
-    with st.expander("International Normalised Ratio (INR)" (Min)):
+    with st.expander("International Normalised Ratio (INR) Min"):
         st.write('A normal INR is 1.0. Each increase of 0.1 means the blood is slightly thinner (it takes longer to clot). INR is related to the prothrombin time (PT).')
         st.write('- [Veteran Affairs](https://www.hepatitis.va.gov/hcv/patient/diagnosis/labtests-INR.asp#:~:text=A%20normal%20INR%20is%201.0,the%20prothrombin%20time%20(PT).)')
         
@@ -53,7 +53,7 @@ with st.sidebar:
         X['inr_min'] = inr_min
 
     # INR Max
-    with st.expander("International Normalised Ratio (INR) (Max)"):
+    with st.expander("International Normalised Ratio (INR) Max"):
         st.write('A normal INR is 1.0. Each increase of 0.1 means the blood is slightly thinner (it takes longer to clot). INR is related to the prothrombin time (PT).')
         st.write('- [Veteran Affairs](https://www.hepatitis.va.gov/hcv/patient/diagnosis/labtests-INR.asp#:~:text=A%20normal%20INR%20is%201.0,the%20prothrombin%20time%20(PT).)')
         

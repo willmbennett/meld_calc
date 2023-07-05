@@ -4,14 +4,26 @@ import pandas as pd
 import pickle
 
 df_clean = pd.read_csv('mimic_iv_cleaned.csv')
-X = df_clean.drop(['target'], axis=1)
-y = df_clean['target']
+# Load the model
+loaded_model = pickle.load(open('final_model.pkl', 'rb'))
+
+# Opening intro text
+st.write("# Calculate Outcome for Cirrhosis Patient")
+
+parient_choice = st.radio(
+    "Example patient choice",
+    ('Survived', 'Perished'))
+
+if parient_choice == 'Survived':
+    selected_patient_data = df_clean[df_clean.target == 1].sample()
+else:
+    selected_patient_data = df_clean[df_clean.target == 0].sample()
+
+X = selected_patient_data.drop(['target'], axis=1)
+y = selected_patient_data['target']
 
 # Now - predicting!
 if st.button(label="Click to Predict"):
-
-    # Load the model
-    loaded_model = pickle.load(open('final_model.pkl', 'rb'))
     # Make predictions (and get out pred probabilities)
     pred = loaded_model.predict(X[:1])[0]
     proba = loaded_model.predict_proba(X[:1])[:,1][0]

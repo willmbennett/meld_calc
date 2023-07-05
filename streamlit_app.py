@@ -4,9 +4,25 @@ import streamlit as st
 import pandas as pd
 import pickle
 
+# Create a custom column selector to add in the clustering
+from sklearn.base import BaseEstimator, TransformerMixin
+
+class Kmean_cluster(BaseEstimator, TransformerMixin):
+    '''select specific columns of a given dataset'''
+
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X, y=None):
+        X_df = pd.DataFrame(X)
+        kmeans = KMeans(n_clusters=2, random_state=42, n_init=10).fit_predict(X)
+        X_df['kmeans_cluster'] = kmeans
+        return np.array(X_df)
+
+
 df_clean = pd.read_csv('data/mimic_iv_cleaned.csv')
 # Load the model
-loaded_model = pickle.load(open('models/XGB_SFM.pkl', 'rb'))
+loaded_model = pickle.load(open('models/xgb_clus.pkl', 'rb'))
 
 # Opening intro text
 st.write("# Calculate Outcome for Cirrhosis Patient")
@@ -31,7 +47,7 @@ num_cols = ['inr_min',
             'bun_min',
             'aniongap_min',
             'bilirubin_total_min',
-            #'Kmeans Cluster',
+            'Kmeans Cluster',
             'alp_min',
             'age',
             'ptt_min',

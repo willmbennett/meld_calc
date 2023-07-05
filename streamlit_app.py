@@ -23,7 +23,7 @@ X = selected_patient_data.drop(['target'], axis=1)
 y = selected_patient_data['target']
 st.write(f'patient index {X.index}')
 
-st.write(f"Total Number of features: {len(X)} %")
+st.write(f"Total Number of features: {len(X.columns)}")
 
 num_cols = {'inr_min',
             'pt_min',
@@ -39,7 +39,7 @@ cat_cols = ['gender', 'race']
 # INR 
 
 inr_label = 'International Normalised Ratio (INR) Min:'
-inr_default_value = X['inr_min'][0]
+inr_default_value = X['inr_min'].iloc[0]
 inr_min = st.number_input(inr_label, value=inr_default_value)
 st.write('New INR Min:', inr_min)
 X['inr_min'] = inr_min

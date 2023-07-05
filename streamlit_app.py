@@ -15,9 +15,9 @@ parient_choice = st.radio(
     ('Survived', 'Perished'))
 
 if parient_choice == 'Survived':
-    selected_patient_data = df_clean[df_clean.target == 1].sample()
-else:
     selected_patient_data = df_clean[df_clean.target == 0].sample()
+else:
+    selected_patient_data = df_clean[df_clean.target == 1].sample()
 
 X = selected_patient_data.drop(['target'], axis=1)
 y = selected_patient_data['target']
@@ -25,8 +25,8 @@ y = selected_patient_data['target']
 # Now - predicting!
 if st.button(label="Click to Predict"):
     # Make predictions (and get out pred probabilities)
-    pred = loaded_model.predict(X[:1])[0]
-    proba = loaded_model.predict_proba(X[:1])[:,1][0]
+    pred = loaded_model.predict(X)[0]
+    proba = loaded_model.predict_proba(X)[:,1][0]
     
     # Sharing the predictions
     if pred == 0:

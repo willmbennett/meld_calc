@@ -59,7 +59,7 @@ with st.sidebar:
         
         inr_max_label = 'INR Max:'
         inr_max_default_value = X['inr_max'].iloc[0]
-        inr_min = st.number_input(inr_max_label, value=inr_max_default_value, step=0.1)
+        inr_max = st.number_input(inr_max_label, value=inr_max_default_value, step=0.1)
         st.write('New INR Max:', round(inr_max,1))
         X['inr_max'] = inr_max
 

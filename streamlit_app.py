@@ -44,7 +44,7 @@ with st.sidebar:
     # INR Min
     with st.expander("International Normalised Ratio (INR) Min"):
         st.write('A normal INR is 1.0. Each increase of 0.1 means the blood is slightly thinner (it takes longer to clot). INR is related to the prothrombin time (PT).')
-        st.write('- [Veteran Affairs](https://www.hepatitis.va.gov/hcv/patient/diagnosis/labtests-INR.asp#:~:text=A%20normal%20INR%20is%201.0,the%20prothrombin%20time%20(PT).)')
+        st.write('[Veteran Affairs](https://www.hepatitis.va.gov/hcv/patient/diagnosis/labtests-INR.asp#:~:text=A%20normal%20INR%20is%201.0,the%20prothrombin%20time%20(PT).)')
         
         inr_min_label = 'INR Min:'
         inr_min_default_value = X['inr_min'].iloc[0]
@@ -55,16 +55,40 @@ with st.sidebar:
     # INR Max
     with st.expander("International Normalised Ratio (INR) Max"):
         st.write('A normal INR is 1.0. Each increase of 0.1 means the blood is slightly thinner (it takes longer to clot). INR is related to the prothrombin time (PT).')
-        st.write('- [Veteran Affairs](https://www.hepatitis.va.gov/hcv/patient/diagnosis/labtests-INR.asp#:~:text=A%20normal%20INR%20is%201.0,the%20prothrombin%20time%20(PT).)')
+        st.write('[Veteran Affairs](https://www.hepatitis.va.gov/hcv/patient/diagnosis/labtests-INR.asp#:~:text=A%20normal%20INR%20is%201.0,the%20prothrombin%20time%20(PT).)')
         
         inr_max_label = 'INR Max:'
         inr_max_default_value = X['inr_max'].iloc[0]
         inr_max = st.number_input(inr_max_label, value=inr_max_default_value, step=0.1)
         st.write('New INR Max:', round(inr_max,1))
         X['inr_max'] = inr_max
+        
+    # Bun Min
+    with st.expander("Blood urea nitrogen (BUN) Min"):
+        st.write('A common blood test, the blood urea nitrogen (BUN) test reveals important information about how well your kidneys are working. A BUN test measures the amount of urea nitrogen that's in your blood.')
+        st.write('In general, around 6 to 24 mg/dL (2.1 to 8.5 mmol/L) is considered normal.')
+        st.write('[Mayo Clinic](https://www.mayoclinic.org/tests-procedures/blood-urea-nitrogen/about/pac-20384821)')
+        
+        bun_min_label = 'BUN Min:'
+        bun_min_default_value = X['bun_min'].iloc[0]
+        bun_min = st.number_input(bun_min_label, value=bun_min_default_value, step=0.1)
+        st.write('New BUN Min:', round(bun_min,1))
+        X['bun_min'] = bun_min
 
-st.write("## Inputs:")
-st.bar_chart(x=list(X[num_cols].columns), y=list(X[num_cols].values), use_container_width=True)
+    # Anion Gap Min
+    with st.expander("Anion Gap"):
+        st.write('An anion gap blood test checks the acid-base balance of your blood and if the electrolytes in your blood are properly balanced.')
+        st.write('There’s no universal “normal” anion gap, partly because laboratories and healthcare providers can measure and compare different electrolytes in your blood.')
+        st.write('[Mayo Clinic](https://my.clevelandclinic.org/health/diagnostics/22041-anion-gap-blood-test)')
+        
+        aniongap_min_label = 'Anion Gap Min:'
+        aniongap_min_default_value = X['aniongap_min'].iloc[0]
+        aniongap_min = st.number_input(aniongap_min_label, value=aniongap_min_default_value, step=0.1)
+        st.write('New Anion Gap Min:', round(aniongap_min,1))
+        X['aniongap_min'] = aniongap_min
+
+# st.write("## Inputs:")
+# st.bar_chart(x=list(X[num_cols].columns), y=list(X[num_cols].values), use_container_width=True)
 
 st.write("## Predict Patient Outcome:")
 

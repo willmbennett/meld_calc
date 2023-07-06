@@ -55,7 +55,7 @@ with st.sidebar:
         
         bun_min_label = 'BUN Min:'
         bun_min_default_value = X['bun_min'].iloc[0]
-        bun_min = st.number_input(bun_min_label, value=bun_min_default_value, step=1)
+        bun_min = st.number_input(bun_min_label, value=bun_min_default_value, step=1.0)
         X['bun_min'] = bun_min
         
     # Bilirubin test

@@ -24,7 +24,7 @@ X = selected_patient_data.drop(['target'], axis=1)
 y = selected_patient_data['target']
 st.write(f'patient index {X.index}')
 
-Patient Data:
+st.write("### Patient Data:")
 st.write('International Normalised Ratio (INR) Min:', X['inr_min'])
 st.write('Anion Gap:', X['aniongap_min'])
 st.write('Blood urea nitrogen (BUN) Min:', X['bun_min'])

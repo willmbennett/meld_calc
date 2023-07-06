@@ -11,11 +11,11 @@ loaded_model = pickle.load(open('models/XGB_SFM.pkl', 'rb'))
 # Opening intro text
 st.write("# Calculate Outcome for Cirrhosis Patient")
 
-parient_choice = st.radio(
+patient_choice = st.radio(
     "Actual outcome:",
     ('Survived', 'Perished'))
 
-if parient_choice == 'Survived':
+if patient_choice == 'Survived':
     selected_patient_data = df_clean[df_clean.target == 0].sample(random_state=42)
 else:
     selected_patient_data = df_clean[df_clean.target == 1].sample(random_state=42)
@@ -96,7 +96,7 @@ with st.sidebar:
         "Gender:",
         ('Male', 'Female'))
 
-        if parient_choice == 'Male':
+        if gender_choice == 'Male':
             X['gender'] = 'M'
         else:
             X['gender'] = 'F'

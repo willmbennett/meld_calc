@@ -121,8 +121,9 @@ with col2:
     st.metric(label="Age", value=X.age)
 
 with col3:
+    patient_gender =  'Female' if X.gender.values[0] == 'F' else 'Male'
     st.metric(label="BUN Min", value=np.round(X.bun_min,1))
-    st.metric(label="Gender", value=X.gender.values[0])
+    st.metric(label="Gender", value='patient_gender)
 
 
 st.metric(label="Race", value=X.race.values[0])

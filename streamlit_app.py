@@ -103,9 +103,11 @@ with st.sidebar:
 
     # Race
     with st.expander("Race"):
+        race_list = list(df_clean['race'].unique())
+        race_index = race_list.index(X['race'].values[0])
         race = st.selectbox('Selected Race:', 
-                            df_clean['race'],
-                            df_clean.iloc[X.index].index[0]
+                            race_list,
+                            race_index
                            )
 
 # st.write("## Inputs:")

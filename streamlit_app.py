@@ -18,7 +18,7 @@ patient_choice = st.radio(
 seed = 42
 
 def shuffle():
-    seed = round(np.random.normal(0,1,1)*100)
+    seed = np.round(np.random.normal(0,1,1)*100)
 
 st.button('Shuffle', on_click=shuffle())
 

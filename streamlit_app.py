@@ -35,7 +35,7 @@ key_cols = ['inr_min',
            ]
 
 st.write("### Patient Data:")
-st.dataframe(data=X[key_cols]),
+st.dataframe(data=X[key_cols])
 
 with st.sidebar:
     # INR Min

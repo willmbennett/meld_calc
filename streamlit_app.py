@@ -8,14 +8,10 @@ df_clean = pd.read_csv('data/mimic_iv_cleaned.csv')
 # Load the model
 loaded_model = pickle.load(open('models/XGB_SFM.pkl', 'rb'))
 
-col1, col2, col3 = st.columns(3)
-col2.image('images/medical_image.gif')
-
 # Opening intro text
 st.write("# Will's Modified MELD Calculator")
 
-col1, col2, col3 = st.columns(3)
-patient_choice = col2.radio(
+patient_choice = st.radio(
     "Actual outcome:",
     ('Survived', 'Perished'))
 
@@ -136,12 +132,10 @@ pred = loaded_model.predict(X)[0]
 proba = loaded_model.predict_proba(X)[:,1][0]
 
 # Sharing the predictions
+# st.write(f"The person is{' not' if pred == 1 else ''} predicted to survive 90 days.")
+st.metric(label="Model predicts person will die within 90 days:", value=f"{'YES' if pred == 1 else 'NO'}")
+st.metric(label="Likelihood to Die Within 90 Days", value=f"{proba*100:.1f} %")
 
 col1, col2, col3 = st.columns(3)
-with col2:
-    # st.write(f"The person is{' not' if pred == 1 else ''} predicted to survive 90 days.")
-    st.metric(label="Model predicts person will die within 90 days:", value=f"{'YES' if pred == 1 else 'NO'}")
-    st.metric(label="Likelihood to Die Within 90 Days", value=f"{proba*100:.1f} %")
-    
-    
-    st.write('[GIF credit](https://www.behance.net/gallery/73013043/Healthcare-animated-icons)')
+col2.image('images/medical_image.gif')
+st.write('[GIF credit](https://www.behance.net/gallery/73013043/Healthcare-animated-icons)')

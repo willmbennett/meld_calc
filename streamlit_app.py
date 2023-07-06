@@ -106,23 +106,27 @@ key_cols = ['inr_min',
             'bun_min',
             'bilirubin_total_min',
             'age',
-           'gender',
-           'race'
+            'gender',
+            'race'
            ]
 
 st.write("### Patient Data:")
-st.dataframe(data=X[key_cols], hide_index=True, use_container_width=True)
+# st.dataframe(data=X[key_cols], hide_index=True, use_container_width=True)
 
 col1, col2, col3 = st.columns(3)
 
 with col1:
-   st.metric(label="INR Min", value=X.inr_min)
+    st.metric(label="INR Min", value=X.inr_min)
+    st.metric(label="Bilirubin Total Min", value=X.bilirubin_total_min)
 
 with col2:
     st.metric(label="Anion Gap Min", value=X.aniongap_min)
+    st.metric(label="Age", value=X.age)
+    st.metric(label="Race", value=X.race)
 
 with col3:
     st.metric(label="BUN Min", value=X.bun_min)
+    st.metric(label="Gender", value=X.gender)
 
 # Make predictions (and get out pred probabilities)
 pred = loaded_model.predict(X)[0]

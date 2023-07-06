@@ -108,7 +108,7 @@ key_cols = ['inr_min',
            ]
 
 st.write("### Patient Data:")
-st.dataframe(data=X[key_cols].T, hide_index=True, use_container_width=True)
+st.dataframe(data=X[key_cols], hide_index=True, use_container_width=True)
 
 # Make predictions (and get out pred probabilities)
 pred = loaded_model.predict(X)[0]

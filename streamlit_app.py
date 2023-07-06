@@ -16,9 +16,9 @@ patient_choice = st.radio(
     ('Survived', 'Perished'))
 
 if patient_choice == 'Survived':
-    selected_patient_data = df_clean[df_clean.target == 0].sample(random_state=42)
+    selected_patient_data = df_clean[df_clean.target == 0].sample(random_state=20)
 else:
-    selected_patient_data = df_clean[df_clean.target == 1].sample(random_state=42)
+    selected_patient_data = df_clean[df_clean.target == 1].sample(random_state=20)
 
 X = selected_patient_data.drop(['target'], axis=1)
 y = selected_patient_data['target']

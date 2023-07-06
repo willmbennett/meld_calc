@@ -109,6 +109,7 @@ with st.sidebar:
                             race_list,
                             race_index
                            )
+        X['race'] = race
 
 # st.write("## Inputs:")
 # st.bar_chart(x=list(X[num_cols].columns), y=list(X[num_cols].values), use_container_width=True)

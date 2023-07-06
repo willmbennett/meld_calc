@@ -20,7 +20,7 @@ seed = 42
 def shuffle():
     seed = round(np.random.normal(0,1,1)*100)
 
-st.button('Shuffle', on_click(shuffle))
+st.button('Shuffle', on_click=shuffle())
 
 if patient_choice == 'Survived':
     selected_patient_data = df_clean[df_clean.target == 0].sample(random_state=seed)

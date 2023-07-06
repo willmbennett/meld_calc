@@ -9,7 +9,7 @@ df_clean = pd.read_csv('data/mimic_iv_cleaned.csv')
 loaded_model = pickle.load(open('models/XGB_SFM.pkl', 'rb'))
 
 # Opening intro text
-st.write("# Calculate Outcome for Cirrhosis Patient")
+st.write("# Will's Modified MELD Calculator")
 
 patient_choice = st.radio(
     "Actual outcome:",

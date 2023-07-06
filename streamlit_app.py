@@ -108,20 +108,13 @@ key_cols = ['inr_min',
            ]
 
 st.write("### Patient Data:")
-st.dataframe(data=X[key_cols])
-
-st.write("## Predict Patient Outcome:")
+st.dataframe(data=X[key_cols], hide_index=True)
 
 # Make predictions (and get out pred probabilities)
 pred = loaded_model.predict(X)[0]
 proba = loaded_model.predict_proba(X)[:,1][0]
 
 # Sharing the predictions
-if pred == 0:
-    st.write("### The person is predicted to survive 90 days")
-
-elif pred == 1:
-    st.write("### The person is NOT predicted to survive 90 days!")
-
+st.write(f"The person is{' not' if pred == 1 else ''} predicted to survive 90 days.")
 with st.empty():
     st.metric(label="Likelihood to Die Within 90 Days", value=f"{proba*100:.2f} %")

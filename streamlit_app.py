@@ -55,7 +55,7 @@ with st.sidebar:
         
         bun_min_label = 'BUN Min:'
         bun_min_default_value = X['bun_min'].iloc[0]
-        bun_min = st.number_input(bun_min_label, value=bun_min_default_value, step=0.1)
+        bun_min = st.number_input(bun_min_label, value=bun_min_default_value, step=1)
         X['bun_min'] = bun_min
         
     # Bilirubin test
@@ -73,7 +73,7 @@ with st.sidebar:
     with st.expander("Age"):
         age_label = 'Age:'
         age_default_value = X['age'].iloc[0]
-        age = st.number_input(age_label, value=age_default_value, step=1)
+        age = st.number_input(age_label, value=age_default_value, step=5)
         X['age'] = age
 
     # Gender

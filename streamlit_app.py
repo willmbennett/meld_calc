@@ -1,28 +1,12 @@
 # Imports
-from sklearn.cluster import KMeans
 import streamlit as st
 import pandas as pd
 import pickle
 
-# Create a custom column selector to add in the clustering
-from sklearn.base import BaseEstimator, TransformerMixin
-
-class Kmean_cluster(BaseEstimator, TransformerMixin):
-    '''select specific columns of a given dataset'''
-
-    def fit(self, X, y=None):
-        return self
-
-    def transform(self, X, y=None):
-        X_df = pd.DataFrame(X)
-        kmeans = KMeans(n_clusters=2, random_state=42, n_init=10).fit_predict(X)
-        X_df['kmeans_cluster'] = kmeans
-        return np.array(X_df)
-
 
 df_clean = pd.read_csv('data/mimic_iv_cleaned.csv')
 # Load the model
-loaded_model = pickle.load(open('models/xgb_clus.pkl', 'rb'))
+loaded_model = pickle.load(open('models/XGB_SFM.pkl', 'rb'))
 
 # Opening intro text
 st.write("# Calculate Outcome for Cirrhosis Patient")
@@ -43,16 +27,10 @@ st.write(f'patient index {X.index}')
 
 # Sidebar
 num_cols = ['inr_min',
-            'inr_max',
-            'bun_min',
             'aniongap_min',
+            'bun_min',
             'bilirubin_total_min',
-            'Kmeans Cluster',
-            'alp_min',
-            'age',
-            'ptt_min',
-            'pt_min',
-            'pt_max']
+            'age']
 
 cat_cols = ['gender', 'race']
 
@@ -68,16 +46,17 @@ with st.sidebar:
         st.write('New INR Min:', round(inr_min,1))
         X['inr_min'] = inr_min
 
-    # INR Max
-    with st.expander("International Normalised Ratio (INR) Max"):
-        st.write('A normal INR is 1.0. Each increase of 0.1 means the blood is slightly thinner (it takes longer to clot). INR is related to the prothrombin time (PT).')
-        st.write('[Veteran Affairs](https://www.hepatitis.va.gov/hcv/patient/diagnosis/labtests-INR.asp#:~:text=A%20normal%20INR%20is%201.0,the%20prothrombin%20time%20(PT).)')
+    # Anion Gap Min
+    with st.expander("Anion Gap"):
+        st.write("An anion gap blood test checks the acid-base balance of your blood and if the electrolytes in your blood are properly balanced.")
+        st.write("There’s no universal “normal” anion gap, partly because laboratories and healthcare providers can measure and compare different electrolytes in your blood.")
+        st.write('[Mayo Clinic](https://my.clevelandclinic.org/health/diagnostics/22041-anion-gap-blood-test)')
         
-        inr_max_label = 'INR Max:'
-        inr_max_default_value = X['inr_max'].iloc[0]
-        inr_max = st.number_input(inr_max_label, value=inr_max_default_value, step=0.1)
-        st.write('New INR Max:', round(inr_max,1))
-        X['inr_max'] = inr_max
+        aniongap_min_label = 'Anion Gap Min:'
+        aniongap_min_default_value = X['aniongap_min'].iloc[0]
+        aniongap_min = st.number_input(aniongap_min_label, value=aniongap_min_default_value, step=0.1)
+        st.write('New Anion Gap Min:', round(aniongap_min,1))
+        X['aniongap_min'] = aniongap_min
         
     # Bun Min
     with st.expander("Blood urea nitrogen (BUN) Min"):
@@ -90,18 +69,44 @@ with st.sidebar:
         bun_min = st.number_input(bun_min_label, value=bun_min_default_value, step=0.1)
         st.write('New BUN Min:', round(bun_min,1))
         X['bun_min'] = bun_min
-
-    # Anion Gap Min
-    with st.expander("Anion Gap"):
-        st.write("An anion gap blood test checks the acid-base balance of your blood and if the electrolytes in your blood are properly balanced.")
-        st.write("There’s no universal “normal” anion gap, partly because laboratories and healthcare providers can measure and compare different electrolytes in your blood.")
-        st.write('[Mayo Clinic](https://my.clevelandclinic.org/health/diagnostics/22041-anion-gap-blood-test)')
         
-        aniongap_min_label = 'Anion Gap Min:'
-        aniongap_min_default_value = X['aniongap_min'].iloc[0]
-        aniongap_min = st.number_input(aniongap_min_label, value=aniongap_min_default_value, step=0.1)
-        st.write('New Anion Gap Min:', round(aniongap_min,1))
-        X['aniongap_min'] = aniongap_min
+    # Bilirubin test
+    with st.expander("Total Bilirubin Min"):
+        st.write("Bilirubin (bil-ih-ROO-bin) is a yellowish pigment that is made during the breakdown of red blood cells. Bilirubin passes through the liver and is eventually excreted out of the body. Higher than usual levels of bilirubin may indicate different types of liver or bile duct problems.")
+        st.write("Typical results for a total bilirubin test are 1.2 milligrams per deciliter (mg/dL) for adults and usually 1 mg/dL for those under 18.")
+        st.write('[Mayo Clinic](https://www.mayoclinic.org/tests-procedures/bilirubin/about/pac-20393041)')
+        
+        bilirubin_total_min_label = 'Bilirubin Total Min:'
+        bilirubin_total_min_default_value = X['bilirubin_total_min'].iloc[0]
+        bilirubin_total_min = st.number_input(bilirubin_total_min_label, value=bilirubin_total_min_default_value, step=0.1)
+        st.write('New Bilirubin Total Min:', round(bilirubin_total_min,1))
+        X['bilirubin_total_min'] = bilirubin_total_min
+        
+    # Age
+    with st.expander("Age"):
+        age_label = 'Age:'
+        age_default_value = X['age'].iloc[0]
+        age = st.number_input(age_default_value, value=age_default_value, step=1)
+        st.write('New Age:', bilirubin_total_min)
+        X['age'] = age
+
+    # Gender
+    with st.expander("Gender"):
+        gender_choice = st.radio(
+        "Gender:",
+        ('Male', 'Female'))
+
+        if parient_choice == 'Male':
+            X['gender'] = 'M'
+        else:
+            X['gender'] = 'F'
+
+    # Race
+    with st.expander("Race"):
+        race = st.selectbox('Selected Race:', 
+                            df_clean['race'],
+                            df_clean.iloc[X.index].index[0]
+                           )
 
 # st.write("## Inputs:")
 # st.bar_chart(x=list(X[num_cols].columns), y=list(X[num_cols].values), use_container_width=True)

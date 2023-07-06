@@ -103,7 +103,7 @@ with st.sidebar:
 
     # Race
     with st.expander("Race"):
-        race_list = list(df_clean['race'].unique())
+        race_list = list(df_clean.groupby('race').count().sort_values(by='gender', ascending=False).reset_index()['race'])
         race_index = race_list.index(X['race'].values[0])
         race = st.selectbox('Selected Race:', 
                             race_list,

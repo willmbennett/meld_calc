@@ -86,8 +86,8 @@ with st.sidebar:
     with st.expander("Age"):
         age_label = 'Age:'
         age_default_value = X['age'].iloc[0]
-        age = st.number_input(age_default_value, value=age_default_value, step=1)
-        st.write('New Age:', bilirubin_total_min)
+        age = st.number_input(age_label, value=age_default_value, step=1)
+        st.write('New Age:', age)
         X['age'] = age
 
     # Gender

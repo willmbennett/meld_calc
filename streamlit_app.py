@@ -2,7 +2,7 @@
 import streamlit as st
 import pandas as pd
 import pickle
-
+import numpy as np
 
 df_clean = pd.read_csv('data/mimic_iv_cleaned.csv')
 # Load the model

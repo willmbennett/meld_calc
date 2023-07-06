@@ -24,6 +24,14 @@ X = selected_patient_data.drop(['target'], axis=1)
 y = selected_patient_data['target']
 st.write(f'patient index {X.index}')
 
+Patient Data:
+st.write('International Normalised Ratio (INR) Min:', X['inr_min'])
+st.write('Anion Gap:', X['aniongap_min'])
+st.write('Blood urea nitrogen (BUN) Min:', X['bun_min'])
+st.write('Total Bilirubin Min:', X['bilirubin_total_min'])
+st.write('Age:', X['age'])
+st.write('Gender:', X['gender'])
+st.write('Race:', X['race'])
 
 # Sidebar
 num_cols = ['inr_min',
@@ -43,7 +51,6 @@ with st.sidebar:
         inr_min_label = 'INR Min:'
         inr_min_default_value = X['inr_min'].iloc[0]
         inr_min = st.number_input(inr_min_label, value=inr_min_default_value, step=0.1)
-        st.write('New INR Min:', round(inr_min,1))
         X['inr_min'] = inr_min
 
     # Anion Gap Min
@@ -55,7 +62,6 @@ with st.sidebar:
         aniongap_min_label = 'Anion Gap Min:'
         aniongap_min_default_value = X['aniongap_min'].iloc[0]
         aniongap_min = st.number_input(aniongap_min_label, value=aniongap_min_default_value, step=0.1)
-        st.write('New Anion Gap Min:', round(aniongap_min,1))
         X['aniongap_min'] = aniongap_min
         
     # Bun Min
@@ -67,7 +73,6 @@ with st.sidebar:
         bun_min_label = 'BUN Min:'
         bun_min_default_value = X['bun_min'].iloc[0]
         bun_min = st.number_input(bun_min_label, value=bun_min_default_value, step=0.1)
-        st.write('New BUN Min:', round(bun_min,1))
         X['bun_min'] = bun_min
         
     # Bilirubin test
@@ -79,7 +84,6 @@ with st.sidebar:
         bilirubin_total_min_label = 'Bilirubin Total Min:'
         bilirubin_total_min_default_value = X['bilirubin_total_min'].iloc[0]
         bilirubin_total_min = st.number_input(bilirubin_total_min_label, value=bilirubin_total_min_default_value, step=0.1)
-        st.write('New Bilirubin Total Min:', round(bilirubin_total_min,1))
         X['bilirubin_total_min'] = bilirubin_total_min
         
     # Age
@@ -87,7 +91,6 @@ with st.sidebar:
         age_label = 'Age:'
         age_default_value = X['age'].iloc[0]
         age = st.number_input(age_label, value=age_default_value, step=1)
-        st.write('New Age:', age)
         X['age'] = age
 
     # Gender

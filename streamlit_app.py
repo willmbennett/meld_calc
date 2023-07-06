@@ -124,4 +124,4 @@ elif pred == 1:
     st.write("### The person is NOT predicted to survive 90 days!")
 
 with st.empty():
-    st.metric(label="Likelihood to Die Within 90 Days", value={proba*100:.2f})
+    st.metric(label="Likelihood to Die Within 90 Days", value=proba*100:.2f)

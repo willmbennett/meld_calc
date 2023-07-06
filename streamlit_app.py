@@ -25,17 +25,6 @@ y = selected_patient_data['target']
 st.write(f'patient index {X.index}')
 
 # Sidebar
-key_cols = ['inr_min',
-            'aniongap_min',
-            'bun_min',
-            'bilirubin_total_min',
-            'age',
-           'gender',
-           'race'
-           ]
-
-st.write("### Patient Data:")
-st.dataframe(data=X[key_cols])
 
 with st.sidebar:
     # INR Min
@@ -109,8 +98,18 @@ with st.sidebar:
                            )
         X['race'] = race
 
-# st.write("## Inputs:")
-# st.bar_chart(x=list(X[num_cols].columns), y=list(X[num_cols].values), use_container_width=True)
+# Patient Information
+key_cols = ['inr_min',
+            'aniongap_min',
+            'bun_min',
+            'bilirubin_total_min',
+            'age',
+           'gender',
+           'race'
+           ]
+
+st.write("### Patient Data:")
+st.dataframe(data=X[key_cols])
 
 st.write("## Predict Patient Outcome:")
 

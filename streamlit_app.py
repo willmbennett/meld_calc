@@ -11,7 +11,7 @@ loaded_model = pickle.load(open('models/XGB_SFM.pkl', 'rb'))
 # Opening intro text
 st.write("# Will's Modified MELD Calculator")
 
-st.image('images/medical_image.gif')
+st.image('images/medical_image.gif', width=300)
 
 patient_choice = st.radio(
     "Actual outcome:",

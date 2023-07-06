@@ -8,10 +8,11 @@ df_clean = pd.read_csv('data/mimic_iv_cleaned.csv')
 # Load the model
 loaded_model = pickle.load(open('models/XGB_SFM.pkl', 'rb'))
 
-# Opening intro text
-st.write("# Will's Modified MELD Calculator")
 col1, col2, col3 = st.columns(3)
 col2.image('images/medical_image.gif')
+
+# Opening intro text
+st.write("# Will's Modified MELD Calculator")
 
 patient_choice = st.radio(
     "Actual outcome:",
@@ -111,6 +112,17 @@ key_cols = ['inr_min',
 
 st.write("### Patient Data:")
 st.dataframe(data=X[key_cols], hide_index=True, use_container_width=True)
+
+col1, col2, col3 = st.columns(3)
+
+with col1:
+   st.metric(label="INR Min", value=X.inr_min)
+
+with col2:
+    st.metric(label="Anion Gap Min", value=X.aniongap_min)
+
+with col3:
+    st.metric(label="BUN Min", value=X.bun_min)
 
 # Make predictions (and get out pred probabilities)
 pred = loaded_model.predict(X)[0]

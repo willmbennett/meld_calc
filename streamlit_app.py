@@ -24,23 +24,18 @@ X = selected_patient_data.drop(['target'], axis=1)
 y = selected_patient_data['target']
 st.write(f'patient index {X.index}')
 
-st.write("### Patient Data:")
-st.write('International Normalised Ratio (INR) Min:', X['inr_min'])
-st.write('Anion Gap:', X['aniongap_min'])
-st.write('Blood urea nitrogen (BUN) Min:', X['bun_min'])
-st.write('Total Bilirubin Min:', X['bilirubin_total_min'])
-st.write('Age:', X['age'])
-st.write('Gender:', X['gender'])
-st.write('Race:', X['race'])
-
 # Sidebar
-num_cols = ['inr_min',
+key_cols = ['inr_min',
             'aniongap_min',
             'bun_min',
             'bilirubin_total_min',
-            'age']
+            'age',
+           'gender',
+           'race'
+           ]
 
-cat_cols = ['gender', 'race']
+st.write("### Patient Data:")
+st.dataframe(data=X[key_cols]),
 
 with st.sidebar:
     # INR Min

@@ -113,15 +113,15 @@ st.write("### Patient Data:")
 col1, col2, col3 = st.columns(3)
 
 with col1:
-    st.metric(label="INR Min", value=X.inr_min)
-    st.metric(label="Bilirubin Total Min", value=X.bilirubin_total_min)
+    st.metric(label="INR Min", value=np.round(X.inr_min,1))
+    st.metric(label="Bilirubin Total Min", value=np.round(X.bilirubin_total_min,1))
 
 with col2:
-    st.metric(label="Anion Gap Min", value=X.aniongap_min)
+    st.metric(label="Anion Gap Min", value=np.round(X.aniongap_min,1))
     st.metric(label="Age", value=X.age)
 
 with col3:
-    st.metric(label="BUN Min", value=X.bun_min)
+    st.metric(label="BUN Min", value=np.round(X.bun_min,1))
     st.metric(label="Gender", value=X.gender.values[0])
 
 
@@ -131,11 +131,13 @@ st.metric(label="Race", value=X.race.values[0])
 pred = loaded_model.predict(X)[0]
 proba = loaded_model.predict_proba(X)[:,1][0]
 
-# Sharing the predictions
-# st.write(f"The person is{' not' if pred == 1 else ''} predicted to survive 90 days.")
-st.metric(label="Model predicts person will die within 90 days:", value=f"{'YES' if pred == 1 else 'NO'}")
-st.metric(label="Likelihood to Die Within 90 Days", value=f"{proba*100:.1f} %")
+col1, col2 = st.columns(2)
+with col1:
+    # Sharing the predictions
+    # st.write(f"The person is{' not' if pred == 1 else ''} predicted to survive 90 days.")
+    st.metric(label="Model predicts person will die within 90 days:", value=f"{'YES' if pred == 1 else 'NO'}")
+    st.metric(label="Likelihood to Die Within 90 Days", value=f"{proba*100:.1f} %")
 
-col1, col2, col3 = st.columns(3)
-col2.image('images/medical_image.gif')
-st.write('[GIF credit](https://www.behance.net/gallery/73013043/Healthcare-animated-icons)')
+with col2:
+    st.image('images/medical_image.gif')
+    st.write('[GIF credit](https://www.behance.net/gallery/73013043/Healthcare-animated-icons)')

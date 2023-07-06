@@ -115,6 +115,6 @@ pred = loaded_model.predict(X)[0]
 proba = loaded_model.predict_proba(X)[:,1][0]
 
 # Sharing the predictions
-st.write(f"The person is{' not' if pred == 1 else ''} predicted to survive 90 days.")
-with st.empty():
-    st.metric(label="Likelihood to Die Within 90 Days", value=f"{proba*100:.1f} %")
+# st.write(f"The person is{' not' if pred == 1 else ''} predicted to survive 90 days.")
+st.metric(label="Model predicts person will die within 90 days:", value=f"{'YES' if pred == 1 else 'NO'}")
+st.metric(label="Likelihood to Die Within 90 Days", value=f"{proba*100:.1f} %")

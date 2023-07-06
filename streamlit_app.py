@@ -8,7 +8,7 @@ df_clean = pd.read_csv('data/mimic_iv_cleaned.csv')
 # Load the model
 loaded_model = pickle.load(open('models/XGB_SFM.pkl', 'rb'))
 
-st.image('.images/medical_image.gif', caption='[credit](https://www.behance.net/gallery/73013043/Healthcare-animated-icons)')
+st.image('images/medical_image.gif', caption='[credit](https://www.behance.net/gallery/73013043/Healthcare-animated-icons)')
 
 # Opening intro text
 st.write("# Will's Modified MELD Calculator")

@@ -15,10 +15,17 @@ patient_choice = st.radio(
     "Actual outcome:",
     ('Survived', 'Perished'))
 
+seed = 42
+
+def shuffle():
+    seed = round(np.random.normal(0,1,1)*100)
+
+st.button('Shuffle', on_click(shuffle))
+
 if patient_choice == 'Survived':
-    selected_patient_data = df_clean[df_clean.target == 0].sample(random_state=42)
+    selected_patient_data = df_clean[df_clean.target == 0].sample(random_state=seed)
 else:
-    selected_patient_data = df_clean[df_clean.target == 1].sample(random_state=42)
+    selected_patient_data = df_clean[df_clean.target == 1].sample(random_state=seed)
 
 X = selected_patient_data.drop(['target'], axis=1)
 y = selected_patient_data['target']

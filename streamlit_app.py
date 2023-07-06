@@ -16,13 +16,12 @@ patient_choice = st.radio(
     ('Survived', 'Perished'))
 
 if patient_choice == 'Survived':
-    selected_patient_data = df_clean[df_clean.target == 0].sample()
+    selected_patient_data = df_clean[df_clean.target == 0].sample(random_state=42)
 else:
-    selected_patient_data = df_clean[df_clean.target == 1].sample()
+    selected_patient_data = df_clean[df_clean.target == 1].sample(random_state=42)
 
 X = selected_patient_data.drop(['target'], axis=1)
 y = selected_patient_data['target']
-st.write(f'patient index {X.index}')
 
 # Sidebar
 
@@ -120,8 +119,9 @@ proba = loaded_model.predict_proba(X)[:,1][0]
 # Sharing the predictions
 if pred == 0:
     st.write("### The person is predicted to survive 90 days")
-    st.write(f"Predicted probability of dying: {proba*100:.2f} %")
 
 elif pred == 1:
     st.write("### The person is NOT predicted to survive 90 days!")
-    st.write(f"Predicted probability of dying: {proba*100:.2f} %")
+
+with st.empty():
+    st.metric(label="Likelihood to Die Within 90 Days", value={proba*100:.2f})

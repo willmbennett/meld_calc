@@ -122,12 +122,14 @@ with col1:
 with col2:
     st.metric(label="Anion Gap Min", value=X.aniongap_min)
     st.metric(label="Age", value=X.age)
-    st.metric(label="Race", value=X.race.values[0])
 
 with col3:
     st.metric(label="BUN Min", value=X.bun_min)
     st.metric(label="Gender", value=X.gender.values[0])
 
+
+st.metric(label="Race", value=X.race.values[0])
+    
 # Make predictions (and get out pred probabilities)
 pred = loaded_model.predict(X)[0]
 proba = loaded_model.predict_proba(X)[:,1][0]

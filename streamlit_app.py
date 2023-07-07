@@ -35,6 +35,7 @@ with st.sidebar:
         inr_min_default_value = X['inr_min'].iloc[0]
         inr_min = st.number_input(inr_min_label, value=inr_min_default_value, step=0.1)
         X['inr_min'] = inr_min
+        st.image('images/inr_min.png')
 
     # Anion Gap Min
     with st.expander("Anion Gap"):
@@ -46,6 +47,7 @@ with st.sidebar:
         aniongap_min_default_value = X['aniongap_min'].iloc[0]
         aniongap_min = st.number_input(aniongap_min_label, value=aniongap_min_default_value, step=0.1)
         X['aniongap_min'] = aniongap_min
+        st.image('images/aniongap_min.png')
         
     # Bun Min
     with st.expander("Blood urea nitrogen (BUN) Min"):
@@ -57,6 +59,7 @@ with st.sidebar:
         bun_min_default_value = X['bun_min'].iloc[0]
         bun_min = st.number_input(bun_min_label, value=bun_min_default_value, step=1.0)
         X['bun_min'] = bun_min
+        st.image('images/bun_min.png')
         
     # Bilirubin test
     with st.expander("Total Bilirubin Min"):
@@ -75,6 +78,7 @@ with st.sidebar:
         age_default_value = X['age'].iloc[0]
         age = st.number_input(age_label, value=age_default_value, step=5)
         X['age'] = age
+        st.image('images/age.png')
 
     # Gender
     with st.expander("Gender"):
@@ -86,6 +90,7 @@ with st.sidebar:
             X['gender'] = 'M'
         else:
             X['gender'] = 'F'
+        st.image('images/gender.png')
 
     # Race
     with st.expander("Race"):
@@ -96,6 +101,7 @@ with st.sidebar:
                             race_index
                            )
         X['race'] = race
+        st.image('images/race.png')
 
 # Patient Information
 key_cols = ['inr_min',

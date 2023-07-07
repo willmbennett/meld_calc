@@ -48,6 +48,10 @@ My goal was to create a model that performed better than MELD on this dataset. M
 
 The best performing model I created was XGBoost utilizing many data science tools including scaling, encoding, imputing, clustering, smote, and selecting top features from a model.
 
+**Final Model Diagram**
+
+![final mode](./images/final_model.png)
+
 **Recommendations**
 - Automate model calculation from LAB results to improve accuracy (more features)
 - Investigate adding race to calculator

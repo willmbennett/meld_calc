@@ -7,6 +7,10 @@ Active Project Dates: June 26th - July 13th
 
 This project can be viewed live at [StreamLit](https://meldcalc-19nq9gq1tic.streamlit.app/).
 
+
+https://github.com/willmbennett/meld_calc/assets/41313772/dd6408b1-5736-47ab-abb3-5d807aefe21b
+
+
 ## Intro
 
 The Mayo End-Stage Liver Disease (MELD) score is the current accepted score and is used to prioritize organ allocation for liver transplantation. The MELD score is widely accepted and highly validated, and is continually improved.

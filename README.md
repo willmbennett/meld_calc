@@ -52,6 +52,12 @@ My goal was to create a model that performed better than MELD on this dataset. M
 
 The best performing model I created was XGBoost utilizing many data science tools including scaling, encoding, imputing, clustering, smote, and selecting top features from a model. The final model had a C-statistic of 0.81 and a accuracy score of 82% on unseen data. 
 
+![ROC Curve](./images/roc_curves.png)
+
+The model saw a drastic reduction of false positives (9.5%) which is desirable since we really don't want to have patients undergo liver transplants unless they really need it. The trade-off is an increase in false-negatives (50%) but that should be acceptable since there are other treatments for those patients and they could get moved up in line in the future if they are re-admitted to the hospital.
+
+![confusion matricies](./images/confusion_matrix.png)
+
 **Final Model Diagram**
 
 ![final mode](./images/final_model.png)

@@ -54,7 +54,7 @@ The best performing model I created was XGBoost utilizing many data science tool
 
 ![ROC Curve](./images/roc_curves.png)
 
-The model saw a drastic reduction of false positives (9.5%) which is desirable since we really don't want to have patients undergo liver transplants unless they really need it. The trade-off is an increase in false-negatives (50%) but that should be acceptable since there are other treatments for those patients and they could get moved up in line in the future if they are re-admitted to the hospital.
+My model saw a drastic decrease in false negatives from MELD score (50% vs. 79%). It also doesn't raise false positives too much from MELD (9.5% vs. 2.2%) since we really don't want to have patients undergo liver transplants unless they really need it.
 
 ![confusion matricies](./images/confusion_matrix.png)
 

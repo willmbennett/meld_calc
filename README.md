@@ -50,7 +50,7 @@ Technologies used: StandardScaler, OneHotEncoder, PolynomialFeatures, ColumnTran
 
 My goal was to create a model that performed better than MELD on this dataset. Meld C-statistic (AUC) was 0.76 and I was able to select a model that performed better than MELD, although I did end up having to use more features (10 or more).
 
-The best performing model I created was XGBoost utilizing many data science tools including scaling, encoding, imputing, clustering, smote, and selecting top features from a model. The final model had a C-statistic of 0.82 and a accuracy score of 82% on unseen data. 
+The best performing model I created was XGBoost utilizing many data science tools including scaling, encoding, imputing, clustering, smote, and selecting top features from a model. The final model had a C-statistic of 0.81 and a accuracy score of 82% on unseen data. 
 
 **Final Model Diagram**
 

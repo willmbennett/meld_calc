@@ -42,6 +42,10 @@ For this project I will be using a publicly available dataset from Beth Israel D
 
 *Dataset limitation: this data did not include whether patients went on to get a liver transplant, a key datapoint for liver transplantation selection methods. Thus further work on the project should use the OPTN data which includes liver transplant data.*
 
+** Technical Details**
+
+Technologies used: StandardScaler, OneHotEncoder, PolynomialFeatures, ColumnTransformer, Pipelines
+
 # Conclusion
 
 My goal was to create a model that performed better than MELD on this dataset. Meld C-statistic (AUC) was 0.76 and I was able to select a model that performed better than MELD, although I did end up having to use more features (10 or more).
@@ -53,9 +57,10 @@ The best performing model I created was XGBoost utilizing many data science tool
 ![final mode](./images/final_model.png)
 
 **Recommendations**
-- Automate model calculation from LAB results to improve accuracy (more features)
-- Investigate adding race to calculator
-- Implement selected model in MELD calculator
+- Implement simplified model in Will's MELD calculator for a quick win
+- Add race to the official MELD calculator
+- Integrate full model with EHR to improve accuracy and reduce reliance on manual calculators
+
 
 **Analysis Next Steps**
 - Investigate performance of model for different races to determine existance of bias

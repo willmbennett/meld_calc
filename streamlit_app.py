@@ -131,16 +131,16 @@ st.write("### Patient Data:")
 col1, col2, col3 = st.columns(3)
 
 with col1:
-    st.metric(label="INR Min", value=np.round((st.session_state.inr_min,1))
-    st.metric(label="Bilirubin Total Min", value=np.round((st.session_state.bilirubin_total_min,1))
+    st.metric("INR Min", np.round(st.session_state.inr_min,1))
+    st.metric("Bilirubin Total Min", np.round(st.session_state.bilirubin_total_min,1))
 
 with col2:
-    st.metric(label="Anion Gap Min", value=np.round((st.session_state.aniongap_min,1))
-    st.metric(label="Age", value=(st.session_state.age)
+    st.metric("Anion Gap Min", np.round(st.session_state.aniongap_min,1))
+    st.metric("Age", st.session_state.age)
 
 with col3:
-    st.metric(label="BUN Min", value=np.round(X(st.session_state.bun_min,1))
-    st.metric(label="Gender", value=(st.session_state.gender)
+    st.metric("BUN Min", np.round(st.session_state.bun_min,1))
+    st.metric("Gender", st.session_state.gender)
 
 
 st.metric(label="Race", value=(st.session_state.race)

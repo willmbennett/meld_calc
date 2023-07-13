@@ -8,13 +8,13 @@ key_cols = ['inr_min', 'aniongap_min', 'bun_min', 'bilirubin_total_min', 'age', 
 
 # Initialization
 if 'inr_min' not in st.session_state:
-    st.session_state.inr_min = 0.0
+    st.session_state.inr_min = float(0)
 if 'aniongap_min' not in st.session_state:
-    st.session_state.aniongap_min = 0.0
+    st.session_state.aniongap_min = float(0)
 if 'bun_min' not in st.session_state:
-    st.session_state.bun_min = 0.0 
+    st.session_state.bun_min = 0
 if 'bilirubin_total_min' not in st.session_state:
-    st.session_state.bilirubin_total_min = 0.0
+    st.session_state.bilirubin_total_min = 0
 if 'age' not in st.session_state:
     st.session_state.age = 0
 if 'gender' not in st.session_state:
@@ -54,7 +54,7 @@ with st.sidebar:
         st.write('[Veteran Affairs](https://www.hepatitis.va.gov/hcv/patient/diagnosis/labtests-INR.asp#:~:text=A%20normal%20INR%20is%201.0,the%20prothrombin%20time%20(PT).)')
         
         st.session_state.inr_min = st.number_input('INR Min:', 
-                                                   value=st.session_state.inr_min, 
+                                                   value=float(st.session_state.inr_min), 
                                                    step=0.1)
         st.session_state.X['inr_min'] = st.session_state.inr_min
         st.image('images/inr_min.png')

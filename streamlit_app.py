@@ -103,12 +103,9 @@ with st.sidebar:
 
     # Gender
     with st.expander("Gender"):
-        gender_list = ['Male', 'Female']
-        print(st.session_state.gender)
-        gender_index = gender_list.index(st.session_state.gender)
         gender_choice = st.radio("Gender:",
                                  gender_list,
-                                gender_index)
+                                'Male')
 
         if gender_choice == 'Male':
             st.session_state.gender = 'Male'

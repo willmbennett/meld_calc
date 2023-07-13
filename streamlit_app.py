@@ -18,9 +18,9 @@ if 'bilirubin_total_min' not in st.session_state:
 if 'age' not in st.session_state:
     st.session_state.age = int(0)
 if 'gender' not in st.session_state:
-    st.session_state.gender = 'Female'
+    st.session_state.gender = ''
 if 'race' not in st.session_state:
-    st.session_state.race = 'ASIAN'
+    st.session_state.race = ''
 if 'X' not in st.session_state:
     st.session_state.X = []
 if 'pred' not in st.session_state:

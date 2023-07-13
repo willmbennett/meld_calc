@@ -4,6 +4,33 @@ import pandas as pd
 import pickle
 import numpy as np
 
+ key_cols = ['inr_min',
+            'aniongap_min',
+            'bun_min',
+            'bilirubin_total_min',
+            'age',
+            'gender',
+            'race'
+           ]
+
+# Initialization
+if 'inr_min' not in st.session_state:
+    st.session_state.inr_min = 0
+if 'aniongap_min' not in st.session_state:
+    st.session_state.aniongap_min = 0
+if 'bun_min' not in st.session_state:
+    st.session_state.bun_min = 0 
+if 'bilirubin_total_min' not in st.session_state:
+    st.session_state.bilirubin_total_min = 0
+if 'age' not in st.session_state:
+    st.session_state.age = 0
+if 'gender' not in st.session_state:
+    st.session_state.gender = ''
+if 'race' not in st.session_state:
+    st.session_state.race = ''
+if 'X' not in st.session_state:
+    st.session_state.X = []
+
 df_clean = pd.read_csv('data/mimic_iv_cleaned.csv')
 # Load the model
 loaded_model = pickle.load(open('models/XGB_SFM.pkl', 'rb'))
@@ -12,14 +39,14 @@ loaded_model = pickle.load(open('models/XGB_SFM.pkl', 'rb'))
 st.write("# Will's Modified MELD Calculator")
 
 if st.button('Load patient that survived'):
-    selected_patient_data = df_clean[df_clean.target == 0].sample(random_state=20)
-    X = selected_patient_data.drop(['target'], axis=1)
-    y = selected_patient_data['target']
+    st.session_state.X = df_clean[df_clean.target == 0].sample(random_state=20).drop(['target'], axis=1)
+    for col in key_cols:
+        st.session_state[col] = st.session_state.X[col]
     
 if st.button('Load patient that died'):
-    selected_patient_data = df_clean[df_clean.target == 1].sample(random_state=20)
-    X = selected_patient_data.drop(['target'], axis=1)
-    y = selected_patient_data['target']
+    st.session_state.X = df_clean[df_clean.target == 1].sample(random_state=20).drop(['target'], axis=1)
+    for col in key_cols:
+        st.session_state[col] = st.session_state.X[col]
 
 # Sidebar
 
@@ -29,10 +56,10 @@ with st.sidebar:
         st.write('A normal INR is 1.0. Each increase of 0.1 means the blood is slightly thinner (it takes longer to clot). INR is related to the prothrombin time (PT).')
         st.write('[Veteran Affairs](https://www.hepatitis.va.gov/hcv/patient/diagnosis/labtests-INR.asp#:~:text=A%20normal%20INR%20is%201.0,the%20prothrombin%20time%20(PT).)')
         
-        inr_min_label = 'INR Min:'
-        inr_min_default_value = X['inr_min'].iloc[0]
-        inr_min = st.number_input(inr_min_label, value=inr_min_default_value, step=0.1)
-        X['inr_min'] = inr_min
+        st.session_state.inr_min = st.number_input('INR Min:', 
+                                                   value=st.session_state.inr_min, 
+                                                   step=0.1)
+        st.session_state.X['inr_min'] = st.session_state.inr_min
         st.image('images/inr_min.png')
 
     # Anion Gap Min
@@ -41,10 +68,10 @@ with st.sidebar:
         st.write("There’s no universal “normal” anion gap, partly because laboratories and healthcare providers can measure and compare different electrolytes in your blood.")
         st.write('[Mayo Clinic](https://my.clevelandclinic.org/health/diagnostics/22041-anion-gap-blood-test)')
         
-        aniongap_min_label = 'Anion Gap Min:'
-        aniongap_min_default_value = X['aniongap_min'].iloc[0]
-        aniongap_min = st.number_input(aniongap_min_label, value=aniongap_min_default_value, step=0.1)
-        X['aniongap_min'] = aniongap_min
+        st.session_state.aniongap_min = st.number_input('Anion Gap Min:', 
+                                                        value=st.session_state.aniongap_min, 
+                                                        step=0.1)
+        st.session_state.X['aniongap_min'] = st.session_state.aniongap_min
         st.image('images/aniongap_min.png')
         
     # Bun Min
@@ -53,10 +80,10 @@ with st.sidebar:
         st.write("In general, around 6 to 24 mg/dL (2.1 to 8.5 mmol/L) is considered normal.")
         st.write('[Mayo Clinic](https://www.mayoclinic.org/tests-procedures/blood-urea-nitrogen/about/pac-20384821)')
         
-        bun_min_label = 'BUN Min:'
-        bun_min_default_value = X['bun_min'].iloc[0]
-        bun_min = st.number_input(bun_min_label, value=bun_min_default_value, step=1.0)
-        X['bun_min'] = bun_min
+        st.session_state.bun_min = st.number_input('BUN Min:', 
+                                                   value=st.session_state.bun_min, 
+                                                   step=1.0)
+        st.session_state.X['bun_min'] = st.session_state.bun_min
         st.image('images/bun_min.png')
         
     # Bilirubin test
@@ -65,72 +92,65 @@ with st.sidebar:
         st.write("Typical results for a total bilirubin test are 1.2 milligrams per deciliter (mg/dL) for adults and usually 1 mg/dL for those under 18.")
         st.write('[Mayo Clinic](https://www.mayoclinic.org/tests-procedures/bilirubin/about/pac-20393041)')
         
-        bilirubin_total_min_label = 'Bilirubin Total Min:'
-        bilirubin_total_min_default_value = X['bilirubin_total_min'].iloc[0]
-        bilirubin_total_min = st.number_input(bilirubin_total_min_label, value=bilirubin_total_min_default_value, step=0.1)
-        X['bilirubin_total_min'] = bilirubin_total_min
+        st.session_state.bilirubin_total_min = st.number_input('Bilirubin Total Min:', 
+                                                               value=st.session_state.bilirubin_total_min, 
+                                                               step=0.1)
+        st.session_state.X['bilirubin_total_min'] = st.session_state.bilirubin_total_min
         
     # Age
     with st.expander("Age"):
         age_label = 'Age:'
-        age_default_value = X['age'].iloc[0]
-        age = st.number_input(age_label, value=age_default_value, step=5)
-        X['age'] = age
+        st.session_state.age = st.number_input(age_label, value=st.session_state.age, step=5)
+        st.session_state.X['age'] = st.session_state.age
         st.image('images/age.png')
 
     # Gender
     with st.expander("Gender"):
-        gender_choice = st.radio(
-        "Gender:",
-        ('Male', 'Female'))
+        gender_list = ['Male', 'Female']
+        gender_index = race_list.index(st.session_state.gender)
+        gender_choice = st.radio("Gender:",
+                                 gender_list,
+                                gender_index)
 
         if gender_choice == 'Male':
-            X['gender'] = 'M'
+            st.session_state.gender = 'Male'
+            st.session_state.X['gender'] = 'M'
         else:
-            X['gender'] = 'F'
+            st.session_state.X['gender'] = 'F'
+            st.session_state.gender = 'Female'
         st.image('images/gender.png')
 
     # Race
     with st.expander("Race"):
         race_list = list(df_clean.groupby('race').count().sort_values(by='gender', ascending=False).reset_index()['race'])
-        race_index = race_list.index(X['race'].values[0])
+        race_index = race_list.index(st.session_state.race)
         race = st.selectbox('Selected Race:', 
                             race_list,
                             race_index
                            )
-        X['race'] = race
+        st.session_state.X['race'] = race
         st.image('images/race.png')
 
 # Patient Information
-key_cols = ['inr_min',
-            'aniongap_min',
-            'bun_min',
-            'bilirubin_total_min',
-            'age',
-            'gender',
-            'race'
-           ]
 
 st.write("### Patient Data:")
-# st.dataframe(data=X[key_cols], hide_index=True, use_container_width=True)
 
 col1, col2, col3 = st.columns(3)
 
 with col1:
-    st.metric(label="INR Min", value=np.round(X.inr_min,1))
-    st.metric(label="Bilirubin Total Min", value=np.round(X.bilirubin_total_min,1))
+    st.metric(label="INR Min", value=np.round((st.session_state.inr_min,1))
+    st.metric(label="Bilirubin Total Min", value=np.round((st.session_state.bilirubin_total_min,1))
 
 with col2:
-    st.metric(label="Anion Gap Min", value=np.round(X.aniongap_min,1))
-    st.metric(label="Age", value=X.age)
+    st.metric(label="Anion Gap Min", value=np.round((st.session_state.aniongap_min,1))
+    st.metric(label="Age", value=(st.session_state.age)
 
 with col3:
-    patient_gender =  'Female' if X.gender.values[0] == 'F' else 'Male'
-    st.metric(label="BUN Min", value=np.round(X.bun_min,1))
-    st.metric(label="Gender", value=patient_gender)
+    st.metric(label="BUN Min", value=np.round(X(st.session_state.bun_min,1))
+    st.metric(label="Gender", value=(st.session_state.gender)
 
 
-st.metric(label="Race", value=X.race.values[0])
+st.metric(label="Race", value=(st.session_state.race)
     
 # Make predictions (and get out pred probabilities)
 pred = loaded_model.predict(X)[0]

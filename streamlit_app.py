@@ -147,7 +147,7 @@ with st.sidebar:
     with st.expander("Race"):
         def race_update():
             st.write(st.session_state.race)
-            st.session_state.X['race'] = race
+            st.session_state.X['race'] = st.session_state.race
                 
         race_list = list(df_clean.groupby('race').count().sort_values(by='gender', ascending=False).reset_index()['race'])
         

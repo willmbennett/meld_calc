@@ -22,7 +22,7 @@ if 'gender' not in st.session_state:
 if 'race' not in st.session_state:
     st.session_state.race = 'ASIAN'
 if 'X' not in st.session_state:
-    st.session_state.X = []
+    st.session_state.X = pd.DataFrame()
 if 'pred' not in st.session_state:
     st.session_state.pred = int(0)
 if 'proba' not in st.session_state:

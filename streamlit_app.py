@@ -146,7 +146,7 @@ with st.sidebar:
             st.session_state.X['gender'] = st.session_state.gender
             make_predictions()
             
-        st.radio("Gender:",
+        st.selectbox("Gender:",
                  ('M', 'F'),
                  key='gender',
                  on_change=gender_update)

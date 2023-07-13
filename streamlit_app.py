@@ -117,10 +117,8 @@ with st.sidebar:
     # Race
     with st.expander("Race"):
         race_list = list(df_clean.groupby('race').count().sort_values(by='gender', ascending=False).reset_index()['race'])
-        race_index = race_list.index(st.session_state.race)
         race = st.selectbox('Selected Race:', 
-                            race_list,
-                            race_index
+                            race_list
                            )
         st.session_state.X['race'] = race
         st.image('images/race.png')

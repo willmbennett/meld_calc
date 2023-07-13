@@ -4,7 +4,7 @@ import pandas as pd
 import pickle
 import numpy as np
 
- key_cols = ['inr_min', 'aniongap_min', 'bun_min', 'bilirubin_total_min', 'age', 'gender', 'race']
+key_cols = ['inr_min', 'aniongap_min', 'bun_min', 'bilirubin_total_min', 'age', 'gender', 'race']
 
 # Initialization
 if 'inr_min' not in st.session_state:

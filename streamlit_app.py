@@ -140,16 +140,23 @@ with st.sidebar:
         st.radio("Gender:",
                  ('Male', 'Female'),
                  key='gender',
-                 on_change=gender_update))
+                 on_change=gender_update)
         st.image('images/gender.png')
 
     # Race
     with st.expander("Race"):
+        def race_update():
+            st.write(st.session_state.race)
+            st.session_state.X['race'] = race
+                
         race_list = list(df_clean.groupby('race').count().sort_values(by='gender', ascending=False).reset_index()['race'])
+        
         race = st.selectbox('Selected Race:', 
-                            race_list
+                            race_list,
+                            key='race',
+                            on_change=race_update
                            )
-        st.session_state.X['race'] = race
+        
         st.image('images/race.png')
 
 # Patient Information

@@ -185,7 +185,7 @@ with col2:
 
 with col3:
     st.metric("BUN Min", np.round(st.session_state.bun_min,1))
-    st.metric("Gender", st.session_state.gender[0])
+    st.metric("Gender", st.session_state.gender)
     
 st.metric("Race", st.session_state.race)
 

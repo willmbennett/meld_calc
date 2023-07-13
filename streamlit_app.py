@@ -13,12 +13,13 @@ st.write("# Will's Modified MELD Calculator")
 
 if st.button('Load patient that survived'):
     selected_patient_data = df_clean[df_clean.target == 0].sample(random_state=20)
-
+    X = selected_patient_data.drop(['target'], axis=1)
+    y = selected_patient_data['target']
+    
 if st.button('Load patient that died'):
     selected_patient_data = df_clean[df_clean.target == 1].sample(random_state=20)
-
-X = selected_patient_data.drop(['target'], axis=1)
-y = selected_patient_data['target']
+    X = selected_patient_data.drop(['target'], axis=1)
+    y = selected_patient_data['target']
 
 # Sidebar
 

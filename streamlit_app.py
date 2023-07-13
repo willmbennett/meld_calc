@@ -8,15 +8,15 @@ key_cols = ['inr_min', 'aniongap_min', 'bun_min', 'bilirubin_total_min', 'age', 
 
 # Initialization
 if 'inr_min' not in st.session_state:
-    st.session_state.inr_min = 0
+    st.session_state.inr_min = float(0)
 if 'aniongap_min' not in st.session_state:
-    st.session_state.aniongap_min = 0
+    st.session_state.aniongap_min = float(0)
 if 'bun_min' not in st.session_state:
-    st.session_state.bun_min = 0
+    st.session_state.bun_min = float(0)
 if 'bilirubin_total_min' not in st.session_state:
-    st.session_state.bilirubin_total_min = 0
+    st.session_state.bilirubin_total_min = float(0)
 if 'age' not in st.session_state:
-    st.session_state.age = 0
+    st.session_state.age = int(0)
 if 'gender' not in st.session_state:
     st.session_state.gender = 'Female'
 if 'race' not in st.session_state:
@@ -24,9 +24,9 @@ if 'race' not in st.session_state:
 if 'X' not in st.session_state:
     st.session_state.X = []
 if 'pred' not in st.session_state:
-    st.session_state.pred = 0
+    st.session_state.pred = int(0)
 if 'proba' not in st.session_state:
-    st.session_state.proba = 0
+    st.session_state.proba = float(0)
 
 df_clean = pd.read_csv('data/mimic_iv_cleaned.csv')
 # Load the model
@@ -97,7 +97,7 @@ with st.sidebar:
     # Age
     with st.expander("Age"):
         age_label = 'Age:'
-        st.session_state.age = st.number_input(age_label, value=st.session_state.age, step=5)
+        st.session_state.age = st.number_input(age_label, value=int(st.session_state.age), step=5)
         st.session_state.X['age'] = st.session_state.age
         st.image('images/age.png')
 

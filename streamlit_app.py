@@ -78,8 +78,8 @@ with st.sidebar:
         st.write('[Mayo Clinic](https://www.mayoclinic.org/tests-procedures/blood-urea-nitrogen/about/pac-20384821)')
         
         st.session_state.bun_min = st.number_input('BUN Min:', 
-                                                   value=int(st.session_state.bun_min), 
-                                                   step=1.0)
+                                                   value=float(st.session_state.bun_min), 
+                                                   step=float(1.0))
         st.session_state.X['bun_min'] = st.session_state.bun_min
         st.image('images/bun_min.png')
         

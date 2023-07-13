@@ -11,13 +11,10 @@ loaded_model = pickle.load(open('models/XGB_SFM.pkl', 'rb'))
 # Opening intro text
 st.write("# Will's Modified MELD Calculator")
 
-patient_choice = st.radio(
-    "Actual outcome:",
-    ('Survived', 'Perished'))
-
-if patient_choice == 'Survived':
+if st.button('Load patient that survived'):
     selected_patient_data = df_clean[df_clean.target == 0].sample(random_state=20)
-else:
+
+if st.button('Load patient that died'):
     selected_patient_data = df_clean[df_clean.target == 1].sample(random_state=20)
 
 X = selected_patient_data.drop(['target'], axis=1)

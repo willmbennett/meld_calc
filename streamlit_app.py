@@ -18,7 +18,7 @@ if 'bilirubin_total_min' not in st.session_state:
 if 'age' not in st.session_state:
     st.session_state.age = int(0)
 if 'gender' not in st.session_state:
-    st.session_state.gender = 'Female'
+    st.session_state.gender = 'F'
 if 'race' not in st.session_state:
     st.session_state.race = 'ASIAN'
 if 'X' not in st.session_state:
@@ -132,13 +132,10 @@ with st.sidebar:
     with st.expander("Gender"):
         def gender_update():
             st.write(st.session_state.gender)
-            if gender_choice == 'Male':
-                st.session_state.X['gender'] = 'M'
-            else:
-                st.session_state.X['gender'] = 'F'
+            st.session_state.X['gender'] = st.session_state.gender
             
         st.radio("Gender:",
-                 ('Male', 'Female'),
+                 ('M', 'F'),
                  key='gender',
                  on_change=gender_update)
         st.image('images/gender.png')

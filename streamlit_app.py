@@ -32,16 +32,22 @@ df_clean = pd.read_csv('data/mimic_iv_cleaned.csv')
 # Load the model
 loaded_model = pickle.load(open('models/XGB_SFM.pkl', 'rb'))
 
+def make_predictions():
+    st.session_state.pred = loaded_model.predict(st.session_state.X)[0]
+    st.session_state.proba = loaded_model.predict_proba(st.session_state.X)[:,1][0]
+
 # Opening intro text
 st.write("# Will's Modified MELD Calculator")
 
 if st.button('Load patient that survived'):
     st.session_state.X = df_clean[df_clean.target == 0].sample(random_state=20).drop(['target'], axis=1)
+    make_predictions()
     for col in key_cols:
         st.session_state[col] = st.session_state.X[col]
     
 if st.button('Load patient that died'):
     st.session_state.X = df_clean[df_clean.target == 1].sample(random_state=20).drop(['target'], axis=1)
+    make_predictions()
     for col in key_cols:
         st.session_state[col] = st.session_state.X[col]
 
@@ -56,6 +62,7 @@ with st.sidebar:
         def inr_update():
             st.write(st.session_state.inr_min)
             st.session_state.X['inr_min'] = st.session_state.inr_min
+            make_predictions()
             
         st.number_input('INR Min:', 
                         step=0.1,
@@ -74,6 +81,7 @@ with st.sidebar:
         def aniongap_update():
             st.write(st.session_state.aniongap_min)
             st.session_state.X['aniongap_min'] = st.session_state.aniongap_min
+            make_predictions()
             
         st.number_input('Anion Gap Min:', 
                         step=0.1,
@@ -92,6 +100,7 @@ with st.sidebar:
         def bun_min_update():
             st.write(st.session_state.bun_min)
             st.session_state.X['bun_min'] = st.session_state.bun_min
+            make_predictions()
             
         st.number_input('BUN Min:', 
                         key='bun_min',
@@ -109,6 +118,7 @@ with st.sidebar:
         def bilirubin_total_min_update():
             st.write(st.session_state.bilirubin_total_min)
             st.session_state.X['bilirubin_total_min'] = st.session_state.bilirubin_total_min
+            make_predictions()
             
         st.number_input('Bilirubin Total Min:',
                         step=0.1,
@@ -121,6 +131,7 @@ with st.sidebar:
         def age_update():
             st.write(st.session_state.age)
             st.session_state.X['age'] = st.session_state.age
+            make_predictions()
             
         st.number_input('Age:', 
                         step=5,
@@ -133,6 +144,7 @@ with st.sidebar:
         def gender_update():
             st.write(st.session_state.gender)
             st.session_state.X['gender'] = st.session_state.gender
+            make_predictions()
             
         st.radio("Gender:",
                  ('M', 'F'),
@@ -145,6 +157,7 @@ with st.sidebar:
         def race_update():
             st.write(st.session_state.race)
             st.session_state.X['race'] = st.session_state.race
+            make_predictions()
                 
         race_list = list(df_clean.groupby('race').count().sort_values(by='gender', ascending=False).reset_index()['race'])
         
@@ -175,10 +188,6 @@ with col3:
     st.metric("Gender", st.session_state.gender)
     
 st.metric("Race", st.session_state.race)
-
-# Make predictions (and get out pred probabilities)
-st.session_state.pred = loaded_model.predict(st.session_state.X)[0]
-st.session_state.proba = loaded_model.predict_proba(st.session_state.X)[:,1][0]
 
 # Share the predictions
 col1, col2 = st.columns(2)

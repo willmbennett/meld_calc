@@ -124,7 +124,7 @@ with st.sidebar:
             
         st.number_input('Age:', 
                         step=5,
-                        key='bilirubin_total_min',
+                        key='age',
                         on_change=age_update)
         st.image('images/age.png')
 

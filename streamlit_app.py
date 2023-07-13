@@ -8,9 +8,9 @@ key_cols = ['inr_min', 'aniongap_min', 'bun_min', 'bilirubin_total_min', 'age', 
 
 # Initialization
 if 'inr_min' not in st.session_state:
-    st.session_state.inr_min = float(0)
+    st.session_state.inr_min = 0
 if 'aniongap_min' not in st.session_state:
-    st.session_state.aniongap_min = float(0)
+    st.session_state.aniongap_min = 0
 if 'bun_min' not in st.session_state:
     st.session_state.bun_min = 0
 if 'bilirubin_total_min' not in st.session_state:
@@ -66,7 +66,7 @@ with st.sidebar:
         st.write('[Mayo Clinic](https://my.clevelandclinic.org/health/diagnostics/22041-anion-gap-blood-test)')
         
         st.session_state.aniongap_min = st.number_input('Anion Gap Min:', 
-                                                        value=st.session_state.aniongap_min, 
+                                                        value=float(st.session_state.aniongap_min), 
                                                         step=0.1)
         st.session_state.X['aniongap_min'] = st.session_state.aniongap_min
         st.image('images/aniongap_min.png')
@@ -78,7 +78,7 @@ with st.sidebar:
         st.write('[Mayo Clinic](https://www.mayoclinic.org/tests-procedures/blood-urea-nitrogen/about/pac-20384821)')
         
         st.session_state.bun_min = st.number_input('BUN Min:', 
-                                                   value=st.session_state.bun_min, 
+                                                   value=float(st.session_state.bun_min), 
                                                    step=1.0)
         st.session_state.X['bun_min'] = st.session_state.bun_min
         st.image('images/bun_min.png')
@@ -90,7 +90,7 @@ with st.sidebar:
         st.write('[Mayo Clinic](https://www.mayoclinic.org/tests-procedures/bilirubin/about/pac-20393041)')
         
         st.session_state.bilirubin_total_min = st.number_input('Bilirubin Total Min:', 
-                                                               value=st.session_state.bilirubin_total_min, 
+                                                               value=float(st.session_state.bilirubin_total_min), 
                                                                step=0.1)
         st.session_state.X['bilirubin_total_min'] = st.session_state.bilirubin_total_min
         

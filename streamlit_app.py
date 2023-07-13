@@ -23,6 +23,10 @@ if 'race' not in st.session_state:
     st.session_state.race = ''
 if 'X' not in st.session_state:
     st.session_state.X = []
+if 'pred' not in st.session_state:
+    st.session_state.pred = 0
+if 'proba' not in st.session_state:
+    st.session_state.proba = 0
 
 df_clean = pd.read_csv('data/mimic_iv_cleaned.csv')
 # Load the model
@@ -141,20 +145,20 @@ with col2:
 with col3:
     st.metric("BUN Min", np.round(st.session_state.bun_min,1))
     st.metric("Gender", st.session_state.gender)
-
-
-st.metric(label="Race", value=(st.session_state.race)
     
-# Make predictions (and get out pred probabilities)
-pred = loaded_model.predict(X)[0]
-proba = loaded_model.predict_proba(X)[:,1][0]
+st.metric("Race", st.session_state.race)
 
+# Make predictions (and get out pred probabilities)
+st.session_state.pred = loaded_model.predict(st.session_state.X)[0]
+st.session_state.proba = loaded_model.predict_proba(st.session_state.X)[:,1][0]
+
+# Share the predictions
 col1, col2 = st.columns(2)
 with col1:
     # Sharing the predictions
-    # st.write(f"The person is{' not' if pred == 1 else ''} predicted to survive 90 days.")
-    st.metric(label="Model predicts person will die within 90 days:", value=f"{'YES' if pred == 1 else 'NO'}")
-    st.metric(label="Likelihood to Die Within 90 Days", value=f"{proba*100:.1f} %")
+    # st.write(f"The person is{' not' if st.session_state.pred == 1 else ''} predicted to survive 90 days.")
+    st.metric(label="Model predicts person will die within 90 days:", value=f"{'YES' if st.session_state.pred == 1 else 'NO'}")
+    st.metric(label="Likelihood to Die Within 90 Days", value=f"{st.session_state.proba*100:.1f} %")
 
 with col2:
     st.image('images/medical_image.gif')

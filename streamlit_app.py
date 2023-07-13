@@ -8,19 +8,19 @@ key_cols = ['inr_min', 'aniongap_min', 'bun_min', 'bilirubin_total_min', 'age', 
 
 # Initialization
 if 'inr_min' not in st.session_state:
-    st.session_state.inr_min = 0
+    st.session_state.inr_min = 0.0
 if 'aniongap_min' not in st.session_state:
-    st.session_state.aniongap_min = 0
+    st.session_state.aniongap_min = 0.0
 if 'bun_min' not in st.session_state:
-    st.session_state.bun_min = 0 
+    st.session_state.bun_min = 0.0 
 if 'bilirubin_total_min' not in st.session_state:
-    st.session_state.bilirubin_total_min = 0
+    st.session_state.bilirubin_total_min = 0.0
 if 'age' not in st.session_state:
     st.session_state.age = 0
 if 'gender' not in st.session_state:
-    st.session_state.gender = ''
+    st.session_state.gender = 'Female'
 if 'race' not in st.session_state:
-    st.session_state.race = ''
+    st.session_state.race = 'ASIAN'
 if 'X' not in st.session_state:
     st.session_state.X = []
 if 'pred' not in st.session_state:

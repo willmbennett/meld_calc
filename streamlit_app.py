@@ -39,8 +39,6 @@ def make_predictions():
 # Opening intro text
 st.write("# Will's Modified MELD Calculator")
 
-st.write(st.session_state)
-
 if st.button('Load patient that survived'):
     st.session_state.X = df_clean[df_clean.target == 0].sample(random_state=20).drop(['target'], axis=1)
     for col in key_cols:
@@ -53,6 +51,9 @@ if st.button('Load patient that died'):
     for col in key_cols:
         st.session_state[col] = st.session_state.X[col].iloc[0]
     make_predictions()
+
+# For debugging
+# st.write(st.session_state)
 
 # Sidebar
 

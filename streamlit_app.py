@@ -111,7 +111,7 @@ with st.sidebar:
             st.session_state.X['bilirubin_total_min'] = st.session_state.bilirubin_total_min
             
         st.number_input('Bilirubin Total Min:',
-                        step=0.1 
+                        step=0.1,
                         key='bilirubin_total_min',
                         on_change=bilirubin_total_min_update
                       )

@@ -39,6 +39,8 @@ def make_predictions():
 # Opening intro text
 st.write("# Will's Modified MELD Calculator")
 
+st.write(st.session_state)
+
 if st.button('Load patient that survived'):
     st.session_state.X = df_clean[df_clean.target == 0].sample(random_state=20).drop(['target'], axis=1)
     make_predictions()
@@ -60,7 +62,6 @@ with st.sidebar:
         st.write('[Veteran Affairs](https://www.hepatitis.va.gov/hcv/patient/diagnosis/labtests-INR.asp#:~:text=A%20normal%20INR%20is%201.0,the%20prothrombin%20time%20(PT).)')
         
         def inr_update():
-            st.write(st.session_state.inr_min)
             st.session_state.X['inr_min'] = st.session_state.inr_min
             make_predictions()
             
@@ -79,7 +80,6 @@ with st.sidebar:
         st.write('[Mayo Clinic](https://my.clevelandclinic.org/health/diagnostics/22041-anion-gap-blood-test)')
         
         def aniongap_update():
-            st.write(st.session_state.aniongap_min)
             st.session_state.X['aniongap_min'] = st.session_state.aniongap_min
             make_predictions()
             
@@ -98,7 +98,6 @@ with st.sidebar:
         st.write('[Mayo Clinic](https://www.mayoclinic.org/tests-procedures/blood-urea-nitrogen/about/pac-20384821)')
         
         def bun_min_update():
-            st.write(st.session_state.bun_min)
             st.session_state.X['bun_min'] = st.session_state.bun_min
             make_predictions()
             
@@ -116,7 +115,6 @@ with st.sidebar:
         st.write('[Mayo Clinic](https://www.mayoclinic.org/tests-procedures/bilirubin/about/pac-20393041)')
         
         def bilirubin_total_min_update():
-            st.write(st.session_state.bilirubin_total_min)
             st.session_state.X['bilirubin_total_min'] = st.session_state.bilirubin_total_min
             make_predictions()
             
@@ -129,7 +127,6 @@ with st.sidebar:
     # Age
     with st.expander("Age"):
         def age_update():
-            st.write(st.session_state.age)
             st.session_state.X['age'] = st.session_state.age
             make_predictions()
             
@@ -142,7 +139,6 @@ with st.sidebar:
     # Gender
     with st.expander("Gender"):
         def gender_update():
-            st.write(st.session_state.gender)
             st.session_state.X['gender'] = st.session_state.gender
             make_predictions()
             
@@ -155,7 +151,6 @@ with st.sidebar:
     # Race
     with st.expander("Race"):
         def race_update():
-            st.write(st.session_state.race)
             st.session_state.X['race'] = st.session_state.race
             make_predictions()
                 

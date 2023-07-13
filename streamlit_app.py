@@ -52,15 +52,17 @@ with st.sidebar:
     with st.expander("International Normalised Ratio (INR) Min"):
         st.write('A normal INR is 1.0. Each increase of 0.1 means the blood is slightly thinner (it takes longer to clot). INR is related to the prothrombin time (PT).')
         st.write('[Veteran Affairs](https://www.hepatitis.va.gov/hcv/patient/diagnosis/labtests-INR.asp#:~:text=A%20normal%20INR%20is%201.0,the%20prothrombin%20time%20(PT).)')
+        
         def inr_update():
             st.write(st.session_state.inr_min)
+            st.session_state.X['inr_min'] = st.session_state.inr_min
+            
         st.number_input('INR Min:', 
-                        value=float(st.session_state.inr_min), 
                         step=0.1,
                         key='inr_min',
                         on_change=inr_update
                       )
-        st.session_state.X['inr_min'] = st.session_state.inr_min
+        
         st.image('images/inr_min.png')
 
     # Anion Gap Min
@@ -69,10 +71,16 @@ with st.sidebar:
         st.write("There’s no universal “normal” anion gap, partly because laboratories and healthcare providers can measure and compare different electrolytes in your blood.")
         st.write('[Mayo Clinic](https://my.clevelandclinic.org/health/diagnostics/22041-anion-gap-blood-test)')
         
-        st.session_state.aniongap_min = st.number_input('Anion Gap Min:', 
-                                                        value=float(st.session_state.aniongap_min), 
-                                                        step=0.1)
-        st.session_state.X['aniongap_min'] = st.session_state.aniongap_min
+        def aniongap_update():
+            st.write(st.session_state.aniongap_min)
+            st.session_state.X['aniongap_min'] = st.session_state.aniongap_min
+            
+        st.number_input('Anion Gap Min:', 
+                        step=0.1,
+                        key='aniongap_min',
+                        on_change=aniongap_update
+                      )
+        
         st.image('images/aniongap_min.png')
         
     # Bun Min
@@ -81,10 +89,15 @@ with st.sidebar:
         st.write("In general, around 6 to 24 mg/dL (2.1 to 8.5 mmol/L) is considered normal.")
         st.write('[Mayo Clinic](https://www.mayoclinic.org/tests-procedures/blood-urea-nitrogen/about/pac-20384821)')
         
-        st.session_state.bun_min = st.number_input('BUN Min:', 
-                                                   value=float(st.session_state.bun_min), 
-                                                   step=float(1.0))
-        st.session_state.X['bun_min'] = st.session_state.bun_min
+        def bun_min_update():
+            st.write(st.session_state.bun_min)
+            st.session_state.X['bun_min'] = st.session_state.bun_min
+            
+        st.number_input('BUN Min:', 
+                        key='bun_min',
+                        on_change=bun_min_update
+                      )
+        
         st.image('images/bun_min.png')
         
     # Bilirubin test
@@ -93,29 +106,41 @@ with st.sidebar:
         st.write("Typical results for a total bilirubin test are 1.2 milligrams per deciliter (mg/dL) for adults and usually 1 mg/dL for those under 18.")
         st.write('[Mayo Clinic](https://www.mayoclinic.org/tests-procedures/bilirubin/about/pac-20393041)')
         
-        st.session_state.bilirubin_total_min = st.number_input('Bilirubin Total Min:', 
-                                                               value=float(st.session_state.bilirubin_total_min), 
-                                                               step=0.1)
-        st.session_state.X['bilirubin_total_min'] = st.session_state.bilirubin_total_min
+        def bilirubin_total_min_update():
+            st.write(st.session_state.bilirubin_total_min)
+            st.session_state.X['bilirubin_total_min'] = st.session_state.bilirubin_total_min
+            
+        st.number_input('Bilirubin Total Min:',
+                        step=0.1 
+                        key='bilirubin_total_min',
+                        on_change=bilirubin_total_min_update
+                      )
         
     # Age
     with st.expander("Age"):
-        age_label = 'Age:'
-        st.session_state.age = st.number_input(age_label, value=int(st.session_state.age), step=5)
-        st.session_state.X['age'] = st.session_state.age
+        def age_update():
+            st.write(st.session_state.age)
+            st.session_state.X['age'] = st.session_state.age
+            
+        st.number_input('Age:', 
+                        step=5,
+                        key='bilirubin_total_min',
+                        on_change=age_update)
         st.image('images/age.png')
 
     # Gender
     with st.expander("Gender"):
-        gender_choice = st.radio("Gender:",
-                                 ('Male', 'Female'))
-
-        if gender_choice == 'Male':
-            st.session_state.gender = 'Male'
-            st.session_state.X['gender'] = 'M'
-        else:
-            st.session_state.X['gender'] = 'F'
-            st.session_state.gender = 'Female'
+        def gender_update():
+            st.write(st.session_state.gender)
+            if gender_choice == 'Male':
+                st.session_state.X['gender'] = 'M'
+            else:
+                st.session_state.X['gender'] = 'F'
+            
+        st.radio("Gender:",
+                 ('Male', 'Female'),
+                 key='gender',
+                 on_change=gender_update))
         st.image('images/gender.png')
 
     # Race

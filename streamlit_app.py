@@ -43,15 +43,16 @@ st.write(st.session_state)
 
 if st.button('Load patient that survived'):
     st.session_state.X = df_clean[df_clean.target == 0].sample(random_state=20).drop(['target'], axis=1)
-    make_predictions()
     for col in key_cols:
-        st.session_state[col] = st.session_state.X[col]
+        st.session_state[col] = st.session_state.X[col][0]
+    make_predictions()
+    
     
 if st.button('Load patient that died'):
     st.session_state.X = df_clean[df_clean.target == 1].sample(random_state=20).drop(['target'], axis=1)
-    make_predictions()
     for col in key_cols:
-        st.session_state[col] = st.session_state.X[col]
+        st.session_state[col] = st.session_state.X[col][0]
+    make_predictions()
 
 # Sidebar
 

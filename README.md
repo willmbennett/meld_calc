@@ -46,7 +46,7 @@ For this project I will be using a publicly available dataset from Beth Israel D
 
 ** Technical Details**
 
-Technologies used: StandardScaler, OneHotEncoder, PolynomialFeatures, ColumnTransformer, Pipelines
+Technologies used: StandardScaler, OneHotEncoder, PolynomialFeatures, ColumnTransformer, custom column transformers, Pipelines, SMOTE, SelectFromModel, Kmeans clustering, PCA, IsolationForest for automated outlier removal, Logistic Regression, XGBoost, KNN, Neural Networks (keras), RandomizedSearchCV
 
 # Conclusion
 

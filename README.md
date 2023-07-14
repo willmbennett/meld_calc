@@ -5,6 +5,8 @@ Instructor: David Elliot
 
 Active Project Dates: June 26th - July 13th
 
+Special thanks to [Michael Bennett](https://www.linkedin.com/in/michael-bennett-47325a131/) for assisting with cohort selection.
+
 This project can be viewed live at [StreamLit](https://meldcalc-19nq9gq1tic.streamlit.app/).
 
 
